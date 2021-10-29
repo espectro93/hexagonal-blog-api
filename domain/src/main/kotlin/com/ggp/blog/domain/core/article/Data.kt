@@ -1,5 +1,6 @@
 package com.ggp.blog.domain.core.article
 
+import com.ggp.blog.domain.core.comment.Comment
 import com.ggp.blog.domain.core.shared.BaseEntity
 import java.time.Instant
 
@@ -7,6 +8,7 @@ data class Slug(val value: String)
 data class Title(val value: String)
 data class Description(val value: String)
 data class Body(val value: String)
+data class Tag(val value: String)
 
 data class Article(
         override var id: String?,
@@ -14,18 +16,9 @@ data class Article(
         val title: Title,
         val description: Description,
         val body: Body,
-        val tags: Set<String>,
+        val tags: Set<Tag>,
         val comments: List<Comment>
 ) : BaseEntity {
-    fun addComment() = copy(comments = listOf())
-    fun deleteComment() = copy(comments = listOf())
+    fun addComment(comment: Comment) = copy(comments = comments.plus(comment))
+    fun deleteComment(comment: Comment) = copy(comments = comments.minus(comment))
 }
-
-data class Comment(
-        val commentId: String,
-        val articleId: String,
-        val body: Body,
-        val author: String, //Replace with MinimalAuthor or similar Object tuple like (id + string)
-        val createdAt: Instant,
-        val updatedAt: Instant
-)
