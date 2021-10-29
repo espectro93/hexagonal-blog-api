@@ -17,7 +17,9 @@ data class Article(
         val description: Description,
         val body: Body,
         val tags: Set<Tag>,
-        val comments: List<Comment>
+        val comments: List<Comment>,
+        override var updatedAt: Instant,
+        override var createdAt: Instant
 ) : BaseEntity {
     fun addComment(comment: Comment) = copy(comments = comments.plus(comment))
     fun deleteComment(comment: Comment) = copy(comments = comments.minus(comment))

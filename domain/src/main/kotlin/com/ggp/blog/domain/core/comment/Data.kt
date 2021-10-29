@@ -12,8 +12,8 @@ data class Comment(
         val parentId: String?,
         val body: Body,
         val comments: List<Comment>,
-        val createdAt: Instant,
-        val updatedAt: Instant
+        override var updatedAt: Instant,
+        override var createdAt: Instant
 ) : BaseEntity {
     fun addComment(comment: Comment) = copy(comments = comments.plus(comment))
 }

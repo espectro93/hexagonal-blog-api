@@ -2,6 +2,7 @@ package com.ggp.blog.domain.core.user
 
 import com.ggp.blog.domain.core.article.Article
 import com.ggp.blog.domain.core.shared.BaseEntity
+import java.time.Instant
 
 data class Email(val value: String)
 
@@ -10,7 +11,9 @@ data class User(
         val profile: UserProfile?,
         val email: Email,
         val followedUsers: Set<User>,
-        val favoredArticles: Set<Article>
+        val favoredArticles: Set<Article>,
+        override var updatedAt: Instant,
+        override var createdAt: Instant
 ) : BaseEntity {
     fun createProfile() = copy(profile = UserProfile("123"))
     fun deleteProfile() = copy(profile = null)
