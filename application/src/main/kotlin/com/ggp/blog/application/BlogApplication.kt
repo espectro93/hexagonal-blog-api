@@ -1,4 +1,4 @@
-package com.ggp.blog
+package com.ggp.blog.application
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
