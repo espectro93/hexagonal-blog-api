@@ -1,28 +1,44 @@
 package com.ggp.blog.domain.core.user
 
 import com.ggp.blog.domain.core.article.Article
-import com.ggp.blog.domain.core.shared.BaseEntity
-import java.time.Instant
 
+data class UserId(val value: String)
+data class Username(val value: String)
 data class Email(val value: String)
+data class Bio(val value: String)
+data class Image(val value: String)
+data class FollowedCount(val value: Int)
+data class FollowersCount(val value: Int)
 
 data class User(
-        override var id: String?,
-        val profile: UserProfile?,
+        var id: UserId?,
+        val username: Username,
         val email: Email,
-        val followedUsers: Set<User>,
-        val favoredArticles: Set<Article>,
-        override var updatedAt: Instant,
-        override var createdAt: Instant
-) : BaseEntity {
-    fun createProfile() = copy(profile = UserProfile("123"))
-    fun deleteProfile() = copy(profile = null)
-    fun followUser(user: User) = copy(followedUsers = followedUsers.plus(user))
-    fun unfollowUser(user: User) = copy(followedUsers = followedUsers.minus(user))
-    fun favorArticle(article: Article) = copy(favoredArticles = favoredArticles.plus(article))
-    fun disfavorArticle(article: Article) = copy(favoredArticles = favoredArticles.minus(article))
+        val profile: Profile
+) {
+    private lateinit var followedUsers: Set<User>
+    private lateinit var favoredArticles: Set<Article>
+
+    fun followUser(user: User) {
+        if (this::followedUsers.isInitialized && user.id != this.id) followedUsers.plus(user)
+    }
+
+    fun unfollowUser(user: User) {
+        if (this::followedUsers.isInitialized && user.id != this.id) followedUsers.minus(user)
+    }
+
+    fun favorArticle(article: Article) {
+        if (this::favoredArticles.isInitialized) favoredArticles.plus(article)
+    }
+
+    fun disfavorArticle(article: Article) {
+        if (this::favoredArticles.isInitialized) favoredArticles.plus(article)
+    }
 }
 
-data class UserProfile(
-        val userId: String
+data class Profile(
+        val bio: Bio,
+        val image: Image,
+        val followedCount: FollowedCount,
+        val followersCount: FollowersCount
 )

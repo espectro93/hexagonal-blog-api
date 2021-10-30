@@ -6,12 +6,12 @@ interface LoadComment {
     suspend fun load(commentId: String): Comment?
 }
 
-interface LoadAllForArticle {
+interface LoadAllCommentsForArticle {
     suspend fun loadAllForArticle(articleId: String): List<Comment>
 }
 
-interface LoadAllForParentComment {
-    suspend fun loadAllForArticle(parentId: String): List<Comment>
+interface LoadAllCommentsForParentComment {
+    suspend fun loadAllForParent(parentId: String): List<Comment>
 }
 
 interface StoreComment {
