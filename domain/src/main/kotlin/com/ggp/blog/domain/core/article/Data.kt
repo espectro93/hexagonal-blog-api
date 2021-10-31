@@ -1,8 +1,12 @@
 package com.ggp.blog.domain.core.article
 
+import com.ggp.blog.domain.core.shared.BaseEntity
+import com.ggp.blog.domain.core.shared.CreatedDate
+import com.ggp.blog.domain.core.shared.Identifiable
+import com.ggp.blog.domain.core.shared.UpdatedDate
 import java.time.Instant
 
-data class ArticleId(val value: String)
+data class ArticleId(override val value: String) : Identifiable
 data class Slug(val value: String)
 data class Title(val value: String)
 data class Description(val value: String)
@@ -10,39 +14,39 @@ data class Body(val value: String)
 data class Tag(val value: String)
 data class Author(val value: String)
 
+
 data class Article(
-        var id: ArticleId?,
+        override var id: ArticleId? = null,
         val author: Author,
         val slug: Slug,
         val title: Title,
         val description: Description,
         val body: Body,
         val tags: Set<Tag>,
-        val updatedAt: Instant,
-        val createdAt: Instant
-) {
-    private lateinit var comments: Set<Comment>
+        override var updatedAt: UpdatedDate? = null,
+        override var createdAt: CreatedDate? = null
+) : BaseEntity<ArticleId> {
 
-    fun addComment(comment: Comment) {
-        if (this::comments.isInitialized) comments.plus(comment)
-    }
-
-    fun deleteComment(comment: Comment) {
-        if (this::comments.isInitialized) comments.minus(comment)
+    fun writeComment(author: Author, body: Body): PostComment {
+        return PostComment(
+                slug = this.slug,
+                author = author,
+                body = body,
+                createdAt = CreatedDate(Instant.now()),
+                updatedAt = UpdatedDate(Instant.now())
+        )
     }
 }
 
-data class CommentId(val value: String)
+data class CommentId(override val value: String) : Identifiable
 data class ParentCommentId(val value: String)
 
-data class Comment(
-        var id: CommentId?,
-        val parentId: ParentCommentId?,
-        val userId: String,
+data class PostComment(
+        override var id: CommentId? = null,
+        val slug: Slug,
+        val parentId: ParentCommentId? = null,
+        val author: Author,
         val body: Body,
-        val comments: List<Comment>,
-        val updatedAt: Instant,
-        val createdAt: Instant
-) {
-    fun addComment(comment: Comment) = copy(comments = comments.plus(comment))
-}
+        override var updatedAt: UpdatedDate? = null,
+        override var createdAt: CreatedDate? = null
+) : BaseEntity<CommentId>

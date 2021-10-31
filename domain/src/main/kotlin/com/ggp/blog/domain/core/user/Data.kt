@@ -1,11 +1,12 @@
 package com.ggp.blog.domain.core.user
 
-import com.ggp.blog.domain.core.article.Article
 import com.ggp.blog.domain.core.article.Slug
+import com.ggp.blog.domain.core.shared.BaseEntity
+import com.ggp.blog.domain.core.shared.CreatedDate
+import com.ggp.blog.domain.core.shared.Identifiable
+import com.ggp.blog.domain.core.shared.UpdatedDate
 
-//TODO: remove persistence layer, split aggregates and create factory methods on them for actions
-
-data class UserId(val value: String)
+data class UserId(override val value: String): Identifiable
 data class Username(val value: String)
 data class Email(val value: String)
 data class Bio(val value: String)
@@ -13,24 +14,31 @@ data class Image(val value: String)
 data class FolloweeId(val value: String)
 
 data class User(
-        var id: UserId?,
+        override var id: UserId?,
         val username: Username,
         val email: Email,
-        val profile: Profile
-) {
-    fun follow(user: User): FollowedUser {
-        //TODO: check non null for both ids
-        return FollowedUser(
-                id = this.id!!,
-                followeeId = FolloweeId(user.id!!.value)
-        )
+        val profile: Profile,
+        override var updatedAt: UpdatedDate? = null,
+        override var createdAt: CreatedDate? = null
+): BaseEntity<UserId> {
+    fun followUser(userId: UserId): FollowedUser {
+        if (this.id != null) {
+            return FollowedUser(
+                    id = this.id!!,
+                    followeeId = FolloweeId(userId.value)
+            )
+        }
+        throw Exception("Inconsistent state! Following an user without an id is not permitted")
     }
 
-    fun favor(article: Article): FavoredArticle {
-        return FavoredArticle(
-                id = this.id!!,
-                slug = article.slug
-        )
+    fun favorArticle(slug: Slug): FavoredArticle {
+        if (this.id != null) {
+            return FavoredArticle(
+                    id = this.id!!,
+                    slug = slug
+            )
+        }
+        throw Exception("Inconsistent state! Favoring an article without an id is not permitted")
     }
 }
 
@@ -40,11 +48,15 @@ data class Profile(
 )
 
 data class FollowedUser(
-        val id: UserId,
-        val followeeId: FolloweeId
-)
+        override var id: UserId?,
+        val followeeId: FolloweeId,
+        override var updatedAt: UpdatedDate? = null,
+        override var createdAt: CreatedDate? = null
+) : BaseEntity<UserId>
 
 data class FavoredArticle(
-        val id: UserId,
-        val slug: Slug
-)
+        override var id: UserId?,
+        val slug: Slug,
+        override var updatedAt: UpdatedDate? = null,
+        override var createdAt: CreatedDate? = null
+): BaseEntity<UserId>

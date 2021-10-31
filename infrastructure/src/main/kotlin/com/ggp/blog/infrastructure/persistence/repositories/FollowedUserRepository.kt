@@ -1,12 +1,10 @@
 package com.ggp.blog.infrastructure.persistence.repositories
 
-import com.ggp.blog.infrastructure.persistence.model.PersistableFollowedUser
-import kotlinx.coroutines.flow.Flow
+import com.ggp.blog.domain.core.user.FollowedUser
+import com.ggp.blog.domain.core.user.FolloweeId
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
 
-interface FollowedUserRepository : ReactiveMongoRepository<PersistableFollowedUser, String> {
-    fun findByUserId(userId: String): Flux<PersistableFollowedUser>
-    fun findByFollowedUserId(followedUserId: String): Flux<PersistableFollowedUser>
+interface FollowedUserRepository : ReactiveMongoRepository<FollowedUser, String> {
+    fun findAllByFolloweeId(followeeId: FolloweeId): Flux<FollowedUser>
 }
