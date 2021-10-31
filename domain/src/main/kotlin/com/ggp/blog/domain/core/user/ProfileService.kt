@@ -9,7 +9,7 @@ import javax.annotation.Resource
 @Resource
 class ProfileService(private val loadUser: LoadUser) : GetUserProfileUseCase, FollowUserUseCase, UnFollowUserUseCase {
     override suspend fun getBy(username: Username): Profile? {
-        return loadUser.loadByUsername(username)?.profile
+        return loadUser.loadBy(username)?.profile
     }
 
     override suspend fun followBy(username: Username) {

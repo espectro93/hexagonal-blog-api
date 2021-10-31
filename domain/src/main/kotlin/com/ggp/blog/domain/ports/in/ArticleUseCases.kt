@@ -19,14 +19,14 @@ interface GetArticleUseCase {
     suspend fun getAll(): Flow<Article>
 }
 
+interface DeleteArticleUseCase {
+    suspend fun deleteBySlug(slug: Slug)
+}
+
 interface FavorArticleUseCase {
     suspend fun favorBySlug(slug: Slug)
 }
 
 interface DisfavorArticleUseCase {
     suspend fun disfavorBySlug(slug: Slug)
-}
-
-interface DeleteArticleUseCase {
-    suspend fun deleteBySlug(slug: Slug)
 }

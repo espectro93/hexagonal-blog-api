@@ -1,16 +1,17 @@
 package com.ggp.blog.domain.ports.out
 
 import com.ggp.blog.domain.core.article.Article
-
-//TODO: Load Articles By Filters : Tags, Author, Favorites + Pageable
-//TODO: Load Articles Feed -> Load From Favorites newest articles
+import com.ggp.blog.domain.core.article.Slug
+import com.ggp.blog.domain.core.user.UserId
+import kotlinx.coroutines.flow.Flow
 
 interface LoadArticle {
-    suspend fun load(articleId: String): Article?
+    suspend fun loadBy(slug: Slug): Article?
 }
 
 interface LoadAllArticles {
-    suspend fun loadAllPage(): List<Article>
+    suspend fun loadAllPaged(): Flow<Article>
+    suspend fun loadFeed(): Flow<Article>
 }
 
 interface StoreArticle {
@@ -18,5 +19,9 @@ interface StoreArticle {
 }
 
 interface DeleteArticle {
-    suspend fun delete(articleId: String)
+    suspend fun deleteBy(slug: Slug)
+}
+
+interface LoadUserFavoredArticle {
+    suspend fun loadAllPaged(userId: UserId): Flow<Article>
 }

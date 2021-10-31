@@ -1,17 +1,21 @@
 package com.ggp.blog.domain.ports.out
 
-import com.ggp.blog.domain.core.comment.Comment
+import com.ggp.blog.domain.core.article.Comment
+import com.ggp.blog.domain.core.article.CommentId
+import com.ggp.blog.domain.core.article.ParentCommentId
+import com.ggp.blog.domain.core.article.Slug
+import kotlinx.coroutines.flow.Flow
 
 interface LoadComment {
-    suspend fun load(commentId: String): Comment?
+    suspend fun loadBy(commentId: CommentId): Comment?
 }
 
 interface LoadAllCommentsForArticle {
-    suspend fun loadAllForArticle(articleId: String): List<Comment>
+    suspend fun loadAllBy(slug: Slug): Flow<Comment>
 }
 
 interface LoadAllCommentsForParentComment {
-    suspend fun loadAllForParent(parentId: String): List<Comment>
+    suspend fun loadAllBy(parentCommentId: ParentCommentId): Flow<Comment>
 }
 
 interface StoreComment {
@@ -19,5 +23,5 @@ interface StoreComment {
 }
 
 interface DeleteComment {
-    suspend fun delete(commentId: String)
+    suspend fun deleteBy(commentId: CommentId)
 }

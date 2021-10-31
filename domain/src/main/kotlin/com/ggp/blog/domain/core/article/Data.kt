@@ -18,18 +18,26 @@ data class Article(
         val description: Description,
         val body: Body,
         val tags: Set<Tag>,
-        val comments: List<Comment>,
         val updatedAt: Instant,
         val createdAt: Instant
 ) {
-    fun addComment(comment: Comment) = copy(comments = comments.plus(comment))
-    fun deleteComment(comment: Comment) = copy(comments = comments.minus(comment))
+    private lateinit var comments: Set<Comment>
+
+    fun addComment(comment: Comment) {
+        if (this::comments.isInitialized) comments.plus(comment)
+    }
+
+    fun deleteComment(comment: Comment) {
+        if (this::comments.isInitialized) comments.minus(comment)
+    }
 }
 
-data class CommentId(val id: String)
+data class CommentId(val value: String)
+data class ParentCommentId(val value: String)
 
 data class Comment(
         var id: CommentId?,
+        val parentId: ParentCommentId?,
         val userId: String,
         val body: Body,
         val comments: List<Comment>,
