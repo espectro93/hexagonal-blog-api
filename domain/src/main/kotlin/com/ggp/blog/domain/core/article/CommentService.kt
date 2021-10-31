@@ -20,7 +20,7 @@ class CommentService(
         TODO("Not yet implemented")
     }
 
-    override fun deleteBy(commentId: CommentId) {
+    override fun deleteBy(postCommentId: PostCommentId) {
         TODO("Not yet implemented")
     }
 }

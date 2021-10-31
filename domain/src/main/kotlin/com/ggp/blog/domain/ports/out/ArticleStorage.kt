@@ -10,8 +10,8 @@ interface LoadArticle {
 }
 
 interface LoadAllArticles {
-    suspend fun loadAllPaged(): Flow<Article>
-    suspend fun loadFeed(): Flow<Article>
+    suspend fun loadAllBy(page: Int, size: Int): Flow<Article>
+    suspend fun loadAllBy(): Flow<Article>
 }
 
 interface StoreArticle {
@@ -20,8 +20,4 @@ interface StoreArticle {
 
 interface DeleteArticle {
     suspend fun deleteBy(slug: Slug)
-}
-
-interface LoadUserFavoredArticle {
-    suspend fun loadAllPaged(userId: UserId): Flow<Article>
 }

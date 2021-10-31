@@ -38,15 +38,15 @@ data class Article(
     }
 }
 
-data class CommentId(override val value: String) : Identifiable
-data class ParentCommentId(val value: String)
+data class PostCommentId(override val value: String) : Identifiable
+data class ParentPostCommentId(val value: String)
 
 data class PostComment(
-        override var id: CommentId? = null,
+        override var id: PostCommentId? = null,
         val slug: Slug,
-        val parentId: ParentCommentId? = null,
+        val parentPostCommentId: ParentPostCommentId? = null,
         val author: Author,
         val body: Body,
         override var updatedAt: UpdatedDate? = null,
         override var createdAt: CreatedDate? = null
-) : BaseEntity<CommentId>
+) : BaseEntity<PostCommentId>

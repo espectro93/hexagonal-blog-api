@@ -1,17 +1,17 @@
 package com.ggp.blog.domain.ports.`in`
 
-import com.ggp.blog.domain.core.article.Comment
-import com.ggp.blog.domain.core.article.CommentId
+import com.ggp.blog.domain.core.article.PostComment
+import com.ggp.blog.domain.core.article.PostCommentId
 import com.ggp.blog.domain.core.article.Slug
 
 interface CreateCommentUseCase {
-    suspend fun create(comment: Comment): Comment
+    suspend fun create(comment: PostComment): PostComment
 }
 
 interface GetCommentsUseCase {
-    suspend fun getBySlug(slug: Slug): Comment?
+    suspend fun getBySlug(slug: Slug): PostComment?
 }
 
 interface DeleteCommentUseCase {
-    suspend fun deleteBy(commentId: CommentId)
+    suspend fun deleteBy(postCommentId: PostCommentId)
 }
