@@ -5,7 +5,9 @@ import com.ggp.blog.domain.ports.`in`.EditUserUseCase
 import com.ggp.blog.domain.ports.`in`.GetUserUseCase
 import com.ggp.blog.domain.ports.out.LoadUser
 import com.ggp.blog.domain.ports.out.StoreUser
+import javax.annotation.Resource
 
+@Resource
 class UserService(
         private val loadUser: LoadUser,
         private val storeUser: StoreUser

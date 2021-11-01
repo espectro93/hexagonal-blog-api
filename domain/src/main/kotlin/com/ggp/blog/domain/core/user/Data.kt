@@ -23,7 +23,7 @@ data class User(
     fun followUser(userId: UserId): FollowedUser {
         if (this.id != null) {
             return FollowedUser(
-                id = FollowerId(this.id!!.value),
+                followerId = this.id!!,
                 followeeId = FolloweeId(userId.value)
             )
         }
@@ -33,7 +33,7 @@ data class User(
     fun favorArticle(slug: Slug): FavoredArticle {
         if (this.id != null) {
             return FavoredArticle(
-                id = FavoredArticleUserId(this.id!!.value),
+                userId = this.id!!,
                 slug = slug
             )
         }
@@ -47,21 +47,23 @@ data class Profile(
 )
 
 
-data class FollowerId(override val value: String) : Identifiable
+data class FollowedUserId(override val value: String) : Identifiable
 data class FolloweeId(val value: String)
 
 data class FollowedUser(
-    override var id: FollowerId?,
+    override var id: FollowedUserId? = null,
+    val followerId: UserId,
     val followeeId: FolloweeId,
     override var updatedAt: UpdatedDate? = null,
     override var createdAt: CreatedDate? = null
-) : BaseEntity<FollowerId>
+) : BaseEntity<FollowedUserId>
 
-data class FavoredArticleUserId(override val value: String) : Identifiable
+data class FavoredArticleId(override val value: String) : Identifiable
 
 data class FavoredArticle(
-    override var id: FavoredArticleUserId?,
+    override var id: FavoredArticleId? = null,
+    val userId: UserId,
     val slug: Slug,
     override var updatedAt: UpdatedDate? = null,
     override var createdAt: CreatedDate? = null
-) : BaseEntity<FavoredArticleUserId>
+) : BaseEntity<FavoredArticleId>

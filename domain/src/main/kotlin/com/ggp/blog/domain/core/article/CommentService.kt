@@ -4,23 +4,26 @@ import com.ggp.blog.domain.ports.`in`.CreateCommentUseCase
 import com.ggp.blog.domain.ports.`in`.DeleteCommentUseCase
 import com.ggp.blog.domain.ports.`in`.GetCommentsUseCase
 import com.ggp.blog.domain.ports.out.*
+import javax.annotation.Resource
 
+@Resource
 class CommentService(
-        private val loadComment: LoadComment,
-        private val loadAllCommentsForArticle: LoadAllCommentsForArticle,
-        private val loadAllCommentsForParentComment: LoadAllCommentsForParentComment,
-        private val storeComment: StoreComment,
-        private val deleteComment: DeleteComment
+        private val loadComment: LoadPostComment,
+        private val loadAllCommentsForArticle: LoadAllPostCommentsForArticle,
+        private val loadAllCommentsForParentComment: LoadAllPostCommentsForParentPostComment,
+        private val storeComment: StorePostComment,
+        private val deleteComment: DeletePostComment
 ) : CreateCommentUseCase, GetCommentsUseCase, DeleteCommentUseCase{
-    override fun create(comment: Comment) {
+    override suspend fun create(comment: PostComment): PostComment {
         TODO("Not yet implemented")
     }
 
-    override fun getBySlug(slug: Slug) {
+    override suspend fun getBySlug(slug: Slug): PostComment? {
         TODO("Not yet implemented")
     }
 
-    override fun deleteBy(postCommentId: PostCommentId) {
+    override suspend fun deleteBy(postCommentId: PostCommentId) {
         TODO("Not yet implemented")
     }
+
 }
