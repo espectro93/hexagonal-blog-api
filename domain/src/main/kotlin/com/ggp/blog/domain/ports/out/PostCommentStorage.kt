@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface LoadPostComment {
     suspend fun loadBy(id: PostCommentId): PostComment?
+    suspend fun loadBy(slug: Slug): PostComment?
 }
 
 interface LoadAllPostCommentsForArticle {
