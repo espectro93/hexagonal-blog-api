@@ -4,9 +4,9 @@ import com.ggp.blog.domain.core.user.UserId
 import com.ggp.blog.domain.ports.`in`.*
 import com.ggp.blog.domain.ports.out.*
 import kotlinx.coroutines.flow.Flow
-import javax.annotation.Resource
+import org.springframework.stereotype.Service
 
-@Resource
+@Service
 class ArticleService(
     private val loadArticle: LoadArticle,
     private val loadUser: LoadUser,
@@ -16,7 +16,11 @@ class ArticleService(
     private val storeFavoredArticle: StoreUserFavoredArticle,
     private val deleteArticle: DeleteArticle,
     private val deleteFavoredArticle: DeleteUserFavoredArticle
-) : CreateArticleUseCase, EditArticleUseCases, GetArticleUseCase, DeleteArticleUseCase, FavorArticleUseCase,
+) : CreateArticleUseCase,
+    EditArticleUseCases,
+    GetArticleUseCase,
+    DeleteArticleUseCase,
+    FavorArticleUseCase,
     DisfavorArticleUseCase {
     override suspend fun create(article: Article): Article {
         return storeArticle.store(article)
