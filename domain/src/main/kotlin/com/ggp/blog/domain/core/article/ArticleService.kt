@@ -22,8 +22,17 @@ class ArticleService(
     DeleteArticleUseCase,
     FavorArticleUseCase,
     DisfavorArticleUseCase {
-    override suspend fun create(article: Article): Article {
-        return storeArticle.store(article)
+    override suspend fun create(author: Author,slug: Slug, title: Title, description: Description, body: Body, tags: Set<Tag>): Article {
+        return storeArticle.store(
+                Article(
+                        author = author,
+                        slug = slug,
+                        title = title,
+                        description = description,
+                        body = body,
+                        tags = tags
+                )
+        )
     }
 
     override suspend fun editBy(

@@ -5,7 +5,7 @@ import com.ggp.blog.domain.core.user.UserId
 import kotlinx.coroutines.flow.Flow
 
 interface CreateArticleUseCase {
-    suspend fun create(article: Article): Article
+    suspend fun create(author: Author, slug: Slug, title: Title, description: Description, body: Body, tags: Set<Tag>): Article
 }
 
 interface EditArticleUseCases {
