@@ -9,7 +9,7 @@ interface CreateArticleUseCase {
 }
 
 interface EditArticleUseCases {
-    suspend fun editBy(slug: Slug, title: Title?, description: Description?, body: Body?, tags: Set<Tag>?): Article?
+    suspend fun editBy(author: Author,slug: Slug, title: Title?, description: Description?, body: Body?, tags: Set<Tag>?): Article?
 }
 
 interface GetArticleUseCase {
