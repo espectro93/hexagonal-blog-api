@@ -6,9 +6,9 @@ import com.ggp.blog.domain.ports.`in`.UnFollowUserUseCase
 import com.ggp.blog.domain.ports.out.DeleteFollowedUser
 import com.ggp.blog.domain.ports.out.LoadUser
 import com.ggp.blog.domain.ports.out.StoreFollowedUser
-import javax.annotation.Resource
+import org.springframework.stereotype.Service
 
-@Resource
+@Service
 class ProfileService(
     private val loadUser: LoadUser,
     private val storeFollowedUser: StoreFollowedUser,

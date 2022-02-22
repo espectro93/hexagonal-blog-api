@@ -22,20 +22,23 @@ class ArticleService(
     DeleteArticleUseCase,
     FavorArticleUseCase,
     DisfavorArticleUseCase {
-    override suspend fun create(author: Author,slug: Slug, title: Title, description: Description, body: Body, tags: Set<Tag>): Article {
+    override suspend fun create(
+        article: Article
+    ): Article {
         return storeArticle.store(
-                Article(
-                        author = author,
-                        slug = slug,
-                        title = title,
-                        description = description,
-                        body = body,
-                        tags = tags
-                )
+            Article(
+                author = article.author,
+                slug = article.slug,
+                title = article.title,
+                description = article.description,
+                body = article.body,
+                tags = article.tags
+            )
         )
     }
 
     override suspend fun editBy(
+        author: Author,
         slug: Slug,
         title: Title?,
         description: Description?,
@@ -59,19 +62,19 @@ class ArticleService(
         return loadArticle.loadBy(slug)
     }
 
-    override suspend fun getByAuthor(author: Author, page: Int, size: Int): Flow<Article> {
+    override fun getByAuthor(author: Author, page: Int, size: Int): Flow<Article> {
         return loadAll.loadAllBy(author, page, size)
     }
 
-    override suspend fun getByTag(tags: Set<Tag>, page: Int, size: Int): Flow<Article> {
+    override fun getByTag(tags: Set<Tag>, page: Int, size: Int): Flow<Article> {
         return loadAll.loadAllBy(tags, page, size)
     }
 
-    override suspend fun getFeed(page: Int, size: Int): Flow<Article> {
+    override fun getFeed(page: Int, size: Int): Flow<Article> {
         return loadAll.loadAllBy(page, size)
     }
 
-    override suspend fun getAll(page: Int, size: Int): Flow<Article> {
+    override fun getAll(page: Int, size: Int): Flow<Article> {
         return loadAll.loadAllBy(page, size)
     }
 

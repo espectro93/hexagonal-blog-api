@@ -1,9 +1,6 @@
 package com.ggp.blog.application.article
 
 import com.ggp.blog.domain.core.article.*
-import com.ggp.blog.domain.core.shared.CreatedDate
-import com.ggp.blog.domain.core.shared.UpdatedDate
-import java.time.ZonedDateTime
 import java.util.stream.Collectors
 
 data class ArticleDto(

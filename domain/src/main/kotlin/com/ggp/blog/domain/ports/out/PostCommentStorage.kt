@@ -12,11 +12,11 @@ interface LoadPostComment {
 }
 
 interface LoadAllPostCommentsForArticle {
-    suspend fun loadAllBy(slug: Slug, page: Int, size: Int): Flow<PostComment>
+    fun loadAllBy(slug: Slug, page: Int, size: Int): Flow<PostComment>
 }
 
 interface LoadAllPostCommentsForParentPostComment {
-    suspend fun loadAllBy(parentPostCommentId: ParentPostCommentId, page: Int, size: Int): Flow<PostComment>
+    fun loadAllBy(parentPostCommentId: ParentPostCommentId, page: Int, size: Int): Flow<PostComment>
 }
 
 interface StorePostComment {

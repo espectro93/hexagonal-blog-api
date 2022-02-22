@@ -4,9 +4,9 @@ import com.ggp.blog.domain.ports.`in`.CreateCommentUseCase
 import com.ggp.blog.domain.ports.`in`.DeleteCommentUseCase
 import com.ggp.blog.domain.ports.`in`.GetCommentsUseCase
 import com.ggp.blog.domain.ports.out.*
-import javax.annotation.Resource
+import org.springframework.stereotype.Service
 
-@Resource
+@Service
 class CommentService(
     private val loadComment: LoadPostComment,
     private val loadAllCommentsForArticle: LoadAllPostCommentsForArticle,

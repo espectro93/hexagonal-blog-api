@@ -11,7 +11,9 @@ import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitSingle
 import kotlinx.coroutines.reactive.awaitSingleOrNull
 import org.springframework.data.domain.PageRequest
+import org.springframework.stereotype.Component
 
+@Component
 class PostCommentStorageAdapter(
     private val postCommentRepository: PostCommentRepository
 ) : LoadPostComment, LoadAllPostCommentsForArticle, LoadAllPostCommentsForParentPostComment, StorePostComment,
@@ -20,13 +22,17 @@ class PostCommentStorageAdapter(
         return postCommentRepository.findById(id).awaitSingleOrNull()
     }
 
-    override suspend fun loadAllBy(slug: Slug, page: Int, size: Int): Flow<PostComment> {
+    override fun loadAllBy(slug: Slug, page: Int, size: Int): Flow<PostComment> {
         return postCommentRepository.findAllBySlug(slug, PageRequest.of(page, size)).asFlow()
     }
 
-    override suspend fun loadAllBy(parentPostCommentId: ParentPostCommentId, page: Int, size: Int): Flow<PostComment> {
+    override fun loadAllBy(parentPostCommentId: ParentPostCommentId, page: Int, size: Int): Flow<PostComment> {
         return postCommentRepository.findAllByParentPostCommentId(parentPostCommentId, PageRequest.of(page, size))
             .asFlow()
+    }
+
+    override suspend fun loadBy(slug: Slug): PostComment? {
+        return postCommentRepository.findBySlug(slug)
     }
 
     override suspend fun store(postComment: PostComment): PostComment {

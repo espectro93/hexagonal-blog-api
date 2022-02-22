@@ -8,7 +8,7 @@ import com.ggp.blog.domain.core.user.UserId
 import kotlinx.coroutines.flow.Flow
 
 interface LoadUserFavoredArticle {
-    suspend fun loadAllBy(favoredArticleId: FavoredArticleId, page: Int, size: Int): Flow<Article>
+    fun loadAllBy(favoredArticleId: FavoredArticleId, page: Int, size: Int): Flow<Article>
     suspend fun loadBy(userId: UserId, slug: Slug): FavoredArticle?
 }
 
@@ -16,6 +16,6 @@ interface StoreUserFavoredArticle {
     suspend fun store(userFavoredArticle: FavoredArticle): FavoredArticle
 }
 
-interface DeleteUserFavoredArticle{
+interface DeleteUserFavoredArticle {
     suspend fun deleteBy(favoredArticleId: FavoredArticleId)
 }

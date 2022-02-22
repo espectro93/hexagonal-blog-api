@@ -11,4 +11,5 @@ import reactor.core.publisher.Flux
 interface PostCommentRepository : ReactiveMongoRepository<PostComment, PostCommentId> {
     fun findAllBySlug(slug: Slug, pageable: Pageable): Flux<PostComment>
     fun findAllByParentPostCommentId(parentPostCommentId: ParentPostCommentId, pageable: Pageable): Flux<PostComment>
+    fun findBySlug(slug: Slug): PostComment?
 }

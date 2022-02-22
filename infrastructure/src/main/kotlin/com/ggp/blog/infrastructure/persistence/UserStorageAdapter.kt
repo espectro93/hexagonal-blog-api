@@ -8,7 +8,9 @@ import com.ggp.blog.domain.ports.out.StoreUser
 import com.ggp.blog.infrastructure.persistence.repositories.UserRepository
 import kotlinx.coroutines.reactive.awaitSingle
 import kotlinx.coroutines.reactive.awaitSingleOrNull
+import org.springframework.stereotype.Component
 
+@Component
 class UserStorageAdapter(private val userRepository: UserRepository) : LoadUser, StoreUser {
     override suspend fun loadBy(userId: UserId): User? {
         return userRepository.findById(userId).awaitSingleOrNull()

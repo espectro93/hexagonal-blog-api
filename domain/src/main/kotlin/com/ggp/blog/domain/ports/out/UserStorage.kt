@@ -3,7 +3,6 @@ package com.ggp.blog.domain.ports.out
 import com.ggp.blog.domain.core.user.User
 import com.ggp.blog.domain.core.user.UserId
 import com.ggp.blog.domain.core.user.Username
-import kotlinx.coroutines.flow.Flow
 
 interface LoadUser {
     suspend fun loadBy(userId: UserId): User?

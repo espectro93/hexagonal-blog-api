@@ -4,7 +4,6 @@ import com.ggp.blog.domain.core.article.Article
 import com.ggp.blog.domain.core.article.Author
 import com.ggp.blog.domain.core.article.Slug
 import com.ggp.blog.domain.core.article.Tag
-import com.ggp.blog.domain.core.user.UserId
 import kotlinx.coroutines.flow.Flow
 
 interface LoadArticle {
@@ -12,9 +11,9 @@ interface LoadArticle {
 }
 
 interface LoadAllArticles {
-    suspend fun loadAllBy(page: Int, size: Int): Flow<Article>
-    suspend fun loadAllBy(author: Author, page: Int, size: Int): Flow<Article>
-    suspend fun loadAllBy(tags: Set<Tag>, page: Int, size: Int): Flow<Article>
+    fun loadAllBy(page: Int, size: Int): Flow<Article>
+    fun loadAllBy(author: Author, page: Int, size: Int): Flow<Article>
+    fun loadAllBy(tags: Set<Tag>, page: Int, size: Int): Flow<Article>
 }
 
 interface StoreArticle {
