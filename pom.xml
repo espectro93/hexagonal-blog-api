@@ -18,7 +18,7 @@
     <description>Blog Project</description>
     <properties>
         <java.version>11</java.version>
-        <kotlin.version>1.4.21</kotlin.version>
+        <kotlin.version>1.4.32</kotlin.version>
         <spring-boot.version>2.4.5</spring-boot.version>
         <coroutines.version>1.4.3</coroutines.version>
         <jackson.version>2.9.8</jackson.version>
