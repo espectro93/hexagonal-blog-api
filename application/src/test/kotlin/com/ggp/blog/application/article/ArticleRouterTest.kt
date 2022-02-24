@@ -4,6 +4,7 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.server.ServerResponse.ok
@@ -39,7 +40,7 @@ internal class ArticleRouterTest {
                 )
 
             client.get()
-                .uri { builder -> builder.path("/api/articles").build() }
+                .uri { builder -> builder.path("/api/articles").queryParam("page", 0).queryParam("size", 10).build() }
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
                 .expectStatus()

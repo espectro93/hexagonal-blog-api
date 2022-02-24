@@ -12,7 +12,6 @@ class ArticleRouter {
     @Bean
     fun articleRouter(articleHandler: ArticleHandler) = coRouter {
         accept(MediaType.APPLICATION_JSON).nest {
-            //TODO: check query params for author, feed and tags
             GET("/api/articles", articleHandler::getAllArticles)
             GET(API_ARTICLES_SLUG, articleHandler::getArticleBySlug)
             POST("/api/articles", articleHandler::createArticle)
