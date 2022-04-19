@@ -17,7 +17,7 @@ class SecurityConfig : WebFluxConfigurer {
         return http {
             csrf { disable() }
             authorizeExchange { authorize("/api/**", authenticated) }
-            oauth2ResourceServer { jwt {} }
+            oauth2ResourceServer { jwt{} }
         }
     }
 }

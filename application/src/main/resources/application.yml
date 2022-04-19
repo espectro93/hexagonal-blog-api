@@ -1,1 +1,14 @@
-
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      database: blog#core
+      auto-index-creation: true
+  config:
+    activate:
+      on-profile: local
+okta:
+  oauth2:
+    issuer: https://${OKTA_DOMAIN}/oauth2/default
+    audience: api://default
+    client-id: ${CLIENT_ID}

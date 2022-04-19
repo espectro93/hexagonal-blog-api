@@ -18,7 +18,7 @@
     <description>Blog Project</description>
     <properties>
         <java.version>17</java.version>
-        <kotlin.version>1.5.32</kotlin.version>
+        <kotlin.version>1.6.10</kotlin.version>
         <spring-boot.version>2.6.3</spring-boot.version>
         <coroutines.version>1.5.0</coroutines.version>
         <jackson.version>2.9.8</jackson.version>
@@ -26,7 +26,7 @@
         <javax.version>2.0.1.Final</javax.version>
         <kotlin.reactor-test-extensions.version>1.0.1.RELEASE</kotlin.reactor-test-extensions.version>
         <springmockk.version>1.1.0</springmockk.version>
-        <spotless-maven-plugin.version>2.9.0</spotless-maven-plugin.version>
+        <spotless-maven-plugin.version>2.22.1</spotless-maven-plugin.version>
         <maven.compiler.release>17</maven.compiler.release>
     </properties>
 
@@ -165,14 +165,16 @@
                 <configuration>
                     <kotlin>
                         <trimTrailingWhitespace />
-                        <ktfmt />
+                        <ktlint>
+                            <version>0.45.2</version>
+                        </ktlint>
                     </kotlin>
                 </configuration>
                 <executions>
                     <execution>
                         <phase>verify</phase>
                         <goals>
-                            <goal>check</goal>
+                            <!--<goal>check</goal>-->
                         </goals>
                     </execution>
                 </executions>

@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+okta:
+  oauth2:
+    issuer: https://${OKTA_DOMAIN}/oauth2/default
+    audience: api://default
+    client-id: ${CLIENT_ID}

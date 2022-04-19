@@ -46,7 +46,6 @@ data class Profile(
     val image: Image
 )
 
-
 data class FollowedUserId(override val value: String) : Identifiable
 data class FolloweeId(val value: String)
 
